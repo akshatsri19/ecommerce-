@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import WalletButton from './WalletButton'
+import MintButton from './MintButton'
+import { WalletContext } from '../context/WalletConnect'
+
 
 const Navbar = () => {
     const state = useSelector(state => state.handleCart)
+      const { wallet, networkName } = useContext(WalletContext);
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
             <div className="container">
@@ -31,7 +36,16 @@ const Navbar = () => {
                         <NavLink to="/login" className="btn btn-outline-dark m-2"><i className="fa fa-sign-in-alt mr-1"></i> Login</NavLink>
                         <NavLink to="/register" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Register</NavLink>
                         <NavLink to="/cart" className="btn btn-outline-dark m-2"><i className="fa fa-cart-shopping mr-1"></i> Cart ({state.length}) </NavLink>
+                        <WalletButton /> 
+                        <div className="m-2">
+              <button className="btn btn-success" disabled={!wallet}>
+                <MintButton />
+              </button>
+            </div>
                     </div>
+                    {wallet && networkName && (
+  <span className="text-muted mx-2">🛰 Network: {networkName}</span>
+)}
                 </div>
 
 

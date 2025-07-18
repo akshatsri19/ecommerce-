@@ -20,9 +20,11 @@ import {
 } from "./pages";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
+import { WalletProvider } from "./context/WalletConnect";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <WalletProvider>
   <BrowserRouter>
     <ScrollToTop>
       <Provider store={store}>
@@ -43,4 +45,5 @@ root.render(
     </ScrollToTop>
     <Toaster />
   </BrowserRouter>
+  </WalletProvider>
 );
